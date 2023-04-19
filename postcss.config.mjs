@@ -1,32 +1,41 @@
-import postcssImport from "postcss-import";
 import postcssModules from "postcss-modules";
-import cssnano from "cssnano";
-import advancedPreset from "cssnano-preset-advanced";
 import fs from "node:fs";
 import path from "node:path";
+import cssnano from "cssnano";
+import advancedPreset from "cssnano-preset-advanced";
 
 const generateCljsStyles = (cssFileName, json) => {
-  const moduleName = path.basename(cssFileName, path.extname(cssFileName));
-  const baseModuleName = moduleName.split(".").at(0);
-  const jvmSafeName = baseModuleName.replace("_", "-");
+  const sourceDir = "src/main/todo";
+  const stylesDir = `${sourceDir}/styles`;
+
+  const relPath = path.relative(sourceDir, cssFileName);
+  const relDir = path.dirname(relPath);
+  const baseModuleName = path.basename(cssFileName, path.extname(cssFileName)).replace(".", "_");
+
+  const moduleName = relDir === "." ? baseModuleName : `${relDir}.${baseModuleName}`;
+  const writePath = relDir === "." ? baseModuleName : `${relDir}/${baseModuleName}`;
+
+  const jvmSafeName = moduleName.replace("/", ".").replace("_", "-");
+
+  if (!fs.existsSync(`${stylesDir}/${relDir}`)) {
+    fs.mkdirSync(`${stylesDir}/${relDir}`, { recursive: true });
+  }
 
   const lines = [`(ns todo.styles.${jvmSafeName})\n`];
   for (let [k, v] of Object.entries(json)) {
     lines.push(`(def ${k} "${v}")`);
   }
 
-  fs.writeFileSync(`src/main/todo/styles/${baseModuleName}.cljs`, lines.join("\n"));
-  console.log(`=== Generated todo.styles.${jvmSafeName} ===`);
+  fs.writeFileSync(`${stylesDir}/${writePath}.cljs`, lines.join("\n"));
+  console.log(`=== Generated todo.styles.${jvmSafeName}.cljs ===`);
 }
 
 /** @type{import("postcss-load-config").Config} */
 export default {
   plugins: [
-    postcssImport(),
     postcssModules({
       generateScopedName: "[name]_[local]__[hash:base64:5]",
       getJSON: generateCljsStyles
     }),
-    cssnano(advancedPreset())
   ]
 }
