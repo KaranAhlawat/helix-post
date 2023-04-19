@@ -1,4 +1,7 @@
 import postcssModules from "postcss-modules";
+import postcssCustomMedia from "postcss-custom-media";
+import postcssImports from "postcss-import";
+import cssnanoPlugin from "cssnano";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -42,11 +45,25 @@ const generateCljsStyles = (cssFileName, json) => {
 }
 
 /** @type{import("postcss-load-config").Config} */
-export default {
-  plugins: [
-    postcssModules({
-      generateScopedName: "[name]_[local]__[hash:base64:5]",
-      getJSON: generateCljsStyles
-    }),
-  ]
+let config = {}
+
+if (process.env.POSTCSS_STEP == "modularize") {
+  config = {
+    plugins: [
+      postcssModules({
+        generateScopedName: "[name]_[local]__[hash:base64:5]",
+        getJSON: generateCljsStyles
+      }),
+    ]
+  }
+} else {
+  config = {
+    plugins: [
+      postcssImports(),
+      postcssCustomMedia(),
+      cssnanoPlugin({ preset: "default" })
+    ]
+  }
 }
+
+export default config;

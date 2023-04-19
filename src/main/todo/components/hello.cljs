@@ -1,4 +1,4 @@
-(ns todo.components.hello 
+(ns todo.components.hello
   (:require
    [helix.core :refer [defnc]]
    [helix.dom :as d]

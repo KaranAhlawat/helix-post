@@ -7,3 +7,4 @@ assets
 target/dev/css
 target/dev/js
 src/main/todo/styles
+/.calva/

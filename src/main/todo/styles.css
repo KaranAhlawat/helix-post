@@ -3,7 +3,15 @@
 
 @import "core.css";
 @import "components/hello.module.css";
+@import "components/button.module.css";
+@import "components/final.module.css";
 
 body {
-  background: var(--blue-1);
+  background: var(--blue-2);
+}
+
+@media (--OSdark) {
+  body {
+    background: var(--blue-8);
+  }
 }
