@@ -1,0 +1,5 @@
+.hello {
+  background: var(--green-8);
+  color: var(--green-1);
+  font-size: var(--font-size-8);
+}

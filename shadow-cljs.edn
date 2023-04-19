@@ -1,0 +1,14 @@
+{:source-paths ["src/main"]
+ 
+ :dependencies [[lilactown/helix "0.1.10"]]
+ 
+ :builds
+ {:app {:target :browser
+        :output-dir "target/dev/js"
+        :asset-path "/js"
+        :modules {:main {:entries [todo.core]
+                         :init-fn todo.core/init}}
+        :devtools {:reload-strategy :full
+                   :preloads [todo.dev]}}}
+ 
+ :dev-http {3002 "target/dev"}}

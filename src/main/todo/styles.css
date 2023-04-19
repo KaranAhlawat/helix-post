@@ -1,0 +1,6 @@
+@import "open-props/src/index";
+@import "open-props/src/extra/normalize";
+
+body {
+  background: var(--blue-1);
+}

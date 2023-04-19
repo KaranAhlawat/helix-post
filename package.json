@@ -1,0 +1,29 @@
+{
+  "name": "helix-post",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "css:watch": "onchange -i './src/main/todo/**/*.css' -- npm run postcss:comp",
+    "postcss:comp": "postcss $(fd .css src) --dir assets/stylesheets --verbose && npm run concat",
+    "concat": "cat $(fd .css assets/stylesheets) > target/dev/css/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^6.0.0",
+    "cssnano-preset-advanced": "^6.0.0",
+    "onchange": "^7.1.0",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-modules": "^6.0.0",
+    "shadow-cljs": "^2.22.10"
+  },
+  "dependencies": {
+    "open-props": "^1.5.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-refresh": "^0.14.0"
+  }
+}

@@ -1,0 +1,9 @@
+.clj-kondo
+.git
+.lsp
+.shadow-cljs
+assets
+/node_modules/
+target/dev/css
+target/dev/js
+src/main/todo/styles
