@@ -5,7 +5,6 @@
    [helix.core :refer [$ defnc]]
    [helix.dom :as d]
    [todo.components.hello :refer [hello]]
-   [todo.components.other :refer [other-comp]]
    [todo.styles.core :as styles]))
 
 (defnc app
@@ -14,8 +13,7 @@
   (d/div
    {:class styles/div}
    (d/h1 "Helix + PostCSS")
-   ($ hello)
-   ($ other-comp)))
+   ($ hello)))
 
 (defonce root (rdom/createRoot (js/document.getElementById "app")))
 

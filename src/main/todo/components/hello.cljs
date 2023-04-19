@@ -2,7 +2,7 @@
   (:require
    [helix.core :refer [defnc]]
    [helix.dom :as d]
-   [todo.styles.hello :as styles]))
+   [todo.styles.components.hello-module :as styles]))
 
 (defnc hello
   []
