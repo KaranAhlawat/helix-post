@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "css:watch": "onchange -i './src/main/todo/**/*.css' -- npm run postcss:comp",
-    "postcss:comp": "postcss $(fd .css src) --dir assets/stylesheets --verbose && npm run concat",
-    "concat": "cat $(fd .css assets/stylesheets) > target/dev/css/styles.css"
+    "pcss:mod": "postcss $(fd .css src) --base src/main/todo --dir assets/stylesheets --verbose",
+    "pcss:import": "postcss assets/stylesheets/styles.css -u postcss-import -u cssnano -o target/dev/css/styles.css --verbose",
+    "pcss:gen": "npm run pcss:mod && npm run pcss:import"
   },
   "keywords": [],
   "author": "",
