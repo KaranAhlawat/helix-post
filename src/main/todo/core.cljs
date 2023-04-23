@@ -6,13 +6,13 @@
             [todo.components.button :refer [some-button]]
             [todo.components.final :refer [random-div]]
             [todo.components.hello :refer [hello]]
-            [todo.styles.core :as styles]))
+            [todo.styles.core :as css]))
 
 (defnc app
   []
   {:helix/features {:fast-refresh true}}
   (d/div
-   {:class styles/div}
+   {:class css/div}
    (d/h1 "Helix + PostCSS")
    ($ hello)
    ($ some-button)
